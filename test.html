@@ -1,0 +1,180 @@
+<html>
+    <head>
+        <title>五十音练习</title>
+        <style type="text/css">
+            label {
+                font-size:100px;
+                font-face:微软雅黑;
+				 color: red;
+            }
+			
+			#b_0,#b_1,#b_2 {
+				width: 100px;
+				height: 50px;
+				font-size: 25px;
+			}
+	
+        </style>
+        <script type="text/javascript">
+            var element_all = [
+				"あ","い","う","え","お",
+				"か","き","く","け","こ",
+				"さ","し","す","せ","そ",
+				"た","ち","つ","て","と",
+				"な","に","ぬ","ね","の",
+				"は","ひ","ふ","へ","ほ",
+				"ま","み","む","め","も",
+				"や","ゆ","よ",
+				"ら","り","る","れ","ろ",
+				"わ","を","ん"];
+            var element = [
+				"あ","い","う","え","お","ア","イ","ウ","エ","オ",
+				"か","き","く","け","こ","カ","キ","ク","ケ","コ",
+			];
+            var max = 19;
+            var min = 0;
+            var type = 0;
+            var shuxu = 0;
+            var daoxu = 0;
+			var suiji = 0;
+			var countOneTime = 5;
+                
+            function test() {
+                var test_request_node = document.getElementById("test_request");
+                var test_answer_node = document.getElementById("test_answer");
+                var test_dscription_node = document.getElementById("test_dscription");
+                
+                var test_request = "" //test_request_node.innerText;
+                var test_answer = test_answer_node.value;
+				
+				var count = countOneTime;
+				while(count-- > 0)
+					test_request += getNextElement()+"  ";
+                
+				test_request_node.innerText = test_request;
+                test_dscription_node.innerText = "请输入答案";
+            }
+            function getNextElement(){
+                var test_request_node = document.getElementById("test_request");
+                var test_answer_node = document.getElementById("test_answer");
+                var test_dscription_node = document.getElementById("test_dscription");
+                
+                if(type==0){
+                    //顺序
+                    if(shuxu<max){
+                        var e = element[shuxu];
+                        shuxu++;
+                        return e;
+                    }else if(shuxu==max){
+                        var e = element[shuxu];
+                        test_dscription_node.innerText = "最后一个";
+                        return e;
+                    }else{
+                        var e = element[shuxu-1];
+                        test_dscription_node.innerText = "练习完毕";
+                        return e;
+                    }
+                }else if(type==1){
+                    //倒序
+                    if(daoxu<max){
+                        var e = element[max-daoxu];
+                        daoxu++;
+                        return e;
+                    }else if(daoxu==max){
+                        var e = element[max-daoxu];
+                        test_dscription_node.innerText = "最后一个";
+                        return e;
+                    }else{
+                        var e = element[max-daoxu+1];
+                        test_dscription_node.innerText = "练习完毕";
+                        return e;
+                    }
+                    
+                }else if(type==2){
+                    //随机
+					var r;
+					do {
+						r = getRandom(max,min);
+					
+					} while(suiji==r);
+					suiji = r;
+                    return element[suiji];
+                }
+            }
+            function input_answer(){
+                var test_request_node = document.getElementById("test_request");
+                var test_answer_node = document.getElementById("test_answer");
+                var test_dscription_node = document.getElementById("test_dscription");
+                
+                var test_request = test_request_node.innerText;
+                var test_answer = test_answer_node.value;
+                if(""==test_answer.trim()){
+                    test_dscription_node.innerText = "请输入答案";
+                }else{
+                    if(test_answer.trim()==test_request){
+                        test_dscription_node.innerText = "正确，下一个";
+                        
+                        test_request_node.innerText = getNextElement();
+                        
+                        test_answer_node.value = "";
+                    }else{
+                        test_dscription_node.innerText = "错误";
+                    }
+                }
+            }
+            function getRandom(max,min){
+                
+                return Math.round(Math.random() * (max - min) + min);
+            }
+ 
+            document.onkeydown = function kd(){
+                if(event.keyCode ==13){
+                    input_answer();
+                }
+            }
+            
+            function paixu(t){
+                type = t;
+                //shuxu = 0;
+                //daoxu = 0;
+                var b_0 = document.getElementById("b_0");
+                var b_1 = document.getElementById("b_1");
+                var b_2 = document.getElementById("b_2");
+                if(t==0){
+                    b_0.setAttribute("style","color:#CD9B1D;");
+                    b_1.setAttribute("style","color:black;");
+                    b_2.setAttribute("style","color:black;");
+                }else if(t==1){
+                    b_0.setAttribute("style","color:black;");
+                    b_1.setAttribute("style","color:#CD9B1D;");
+                    b_2.setAttribute("style","color:black;");
+                }else if(t==2){
+                    b_0.setAttribute("style","color:black;");
+                    b_1.setAttribute("style","color:black;");
+                    b_2.setAttribute("style","color:#CD9B1D;");
+                }
+                
+                test();
+            }
+            
+            window.onload=test;
+        </script>
+    </head>
+    <body >
+        <div align="center" style="margin-top:80px">
+            <label id="test_request" ></label>
+        </div>
+        <div align="center" style="margin-top:50px">
+            <input type="button" value="顺序" style="color:#CD9B1D;" onclick="paixu(0)" id="b_0"/>
+            <input type="button" value="倒序" style="margin-left:10px" onclick="paixu(1)" id="b_1"/>
+            <input type="button" value="随机" style="margin-left:10px" onclick="paixu(2)" id="b_2"/>
+        </div>
+        <div align="center" style="margin-top:20px">
+            <span id="test_dscription" style="size:18px;"></span>
+        </div>
+        <div align="center" style="margin-top:20px">
+            <input type="text" id="test_answer" style="font-size:50px;width:80px;" />
+        </div>
+        
+    </body>
+</html>
