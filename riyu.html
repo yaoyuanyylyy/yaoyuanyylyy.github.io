@@ -10,23 +10,42 @@
 			}
 
 			.mb {
-				width: 160px;
-				height: 80px;
-				font-size: 40px;
+				width: 80px;
+				height: 40px;
+				font-size: 20px;
 				margin-left:10px;
 			}
 
 			.rb {
-				width: 200px;
-				height: 100px;
-				font-size: 50px;
+				width: 100px;
+				height: 50px;
+				font-size: 25px;
 				margin-left:10px;
 			}
 
-			.chb {
-				width: 100px;
-				height: 50px;
-				font-size: 35px;
+			.bb {
+				width: 80px;
+				height: 30px;
+				font-size: 20px;
+				margin-left:10px;
+			}
+
+			.cb {
+				width: 50px;
+				height: 25px;
+				font-size: 25px;
+				margin-left:10px;
+			}
+
+			.eb {
+				font-size: 20px;
+				margin-left:10px;
+			}
+
+			.fb {
+				width: 120px;
+				height: 35px;
+				font-size: 20px;
 				margin-left:10px;
 			}
 		</style>
@@ -57,7 +76,7 @@
 				"や","ゆ","よ","ヤ","ユ","ヨ"
 			],
 			[
-				"ら","り","る","れ","ろ","","","","",""
+				"ら","り","る","れ","ろ","ラ","リ","ル","レ","ロ"
 			],
 			[
 				"わ","を","ワ","ヲ"
@@ -74,6 +93,20 @@
 			var chb = new Array();
 			var ids = new Array();			
 			var element = new Array();
+			
+			var fsize = 100;
+			
+			function increase_font() {
+				var oPtxt=document.getElementById("test_request");
+				fsize += 5;
+				oPtxt.style.fontSize=fsize+'px';			
+			}
+			
+			function decrease_font() {
+				var oPtxt=document.getElementById("test_request");
+				fsize -= 5;
+				oPtxt.style.fontSize=fsize+'px';			
+			}
 
             function getNextElement(){
                 var test_request_node = document.getElementById("test_request");
@@ -81,31 +114,28 @@
 				var min = 0;
                 if(type==0){
                     //顺序
-                    if(shuxu<max){
-                        var e = element[shuxu];
+					var e;
+                    if(shuxu<=max){
+                        e = element[shuxu];
                         shuxu++;
-						if(shuxu==max)
-							shuxu = min;
-                        return e;
-                    }else if(shuxu==max){
-                        return element[shuxu];
-                    }else{
-                        return element[shuxu-1];
-                    }
+                    } else
+                        e = element[shuxu-1];
+                    
+					if(shuxu>max)
+						shuxu = min;
+					return e;
                 }else if(type==1){
                     //倒序
-                    if(daoxu<max){
-                        var e = element[max-daoxu];
+					var e;
+                    if(daoxu<=max){
+                        e = element[max-daoxu];
                         daoxu++;
-						if(daoxu==max)
-							daoxu = min;
-                        return e;
-                    }else if(daoxu==max){
-                        return element[max-daoxu];
-                    }else{
-                        return element[max-daoxu+1];
-                    }
-                    
+                    } else
+                        e = element[max-daoxu+1]; 
+					
+					if(daoxu>max)
+						daoxu = min;
+					return e;            
                 }else if(type==2){
                     //随机
 					while(true) {
@@ -145,6 +175,10 @@
 				var countOneTime = document.getElementById('nums').value;
 				if(countOneTime<=0)
 					countOneTime = 5;
+					
+				var linecount = document.getElementById('linecount').value;
+				if(linecount<=0)
+					linecount = 5;
 				
 				element = new Array();
 				
@@ -161,25 +195,38 @@
 				var show_text = "";
 				ids = new Array();
 				var count = countOneTime;
-				while((count--) > 0)
+				for(var i=0; i<count; i++)
+				{
 					show_text += getNextElement()+"  ";
+					if(((i+1)%linecount)==0)
+						show_text += "\n";
+				}
 				
 				test_request_node.innerText = show_text;
 			}
 			
 			function select_all() {
+				shuxu = 0;
+				daoxu = 0;
+				suiji = 0;
 				for(var i=0; i<chb.length; i++) {
 					chb[i].checked = true;
 				}
 			}
 			
 			function select_none() {
+				shuxu = 0;
+				daoxu = 0;
+				suiji = 0;
 				for(var i=0; i<chb.length; i++) {
 					chb[i].checked = !chb[i].checked;
 				}
 			}
 			
 			function select_no() {
+				shuxu = 0;
+				daoxu = 0;
+				suiji = 0;
 				for(var i=0; i<chb.length; i++) {
 					chb[i].checked = false;
 				}
@@ -211,39 +258,46 @@
 		</script>
     </head>
     <body >
-        <div align="center" style="margin-top:80px">
+        <div align="center" style="margin-top:50px">
             <label id="test_request" ></label>
         </div>
-        <div align="center" style="margin-top:50px">
+        <div align="center" style="margin-top:30px">
             <input class="mb" type="button" value="顺序" onclick="paixu(0)" id="b_0"/>
-            <input class="mb" type="button" value="倒序" style=onclick="paixu(1)" id="b_1"/>
+            <input class="mb" type="button" value="倒序" onclick="paixu(1)" id="b_1"/>
             <input class="rb" type="button" value="随机" style="color:#CD9B1D;" onclick="paixu(2)" id="b_2"/>
         </div>
-		<div align="center" style="margin-top:50px;font-size:30px;">
-            个数:
-			<input  align="center" class="chb"  id="nums" value="5"/>
+		<div class="eb" align="center" style="margin-top:50px">
+            总的个数:
+			<input class="mb"  id="nums" value="5"/>
+		</div>
+		<div class="eb" align="center" style="margin-top:20px">
+            每行个数:
+			<input class="mb"  id="linecount" value="5"/>
 		</div>
 		<div align="center" style="margin-top:50px">
-			<input class="chb" type="checkbox" id="row_a" checked=true>あ</input>
-			<input class="chb" type="checkbox" id="row_k">か</input>
-			<input class="chb" type="checkbox" id="row_s">さ</input>
-			<input class="chb" type="checkbox" id="row_t">た</input>
-</br>	
-			<input class="chb" type="checkbox" id="row_n">な</input>
-			<input class="chb" type="checkbox" id="row_h">は</input>
-			<input class="chb" type="checkbox" id="row_m">ま</input>
-			<input class="chb" type="checkbox" id="row_y">や</input>
-</br>	
-			<input class="chb" type="checkbox" id="row_r">ら</input>
-			<input class="chb" type="checkbox" id="row_w">わ</input>
-			<input class="chb" type="checkbox" id="row_b">ん</input>
+			<input class="cb" type="checkbox" id="row_a" checked>あ</input>
+			<input class="cb" type="checkbox" id="row_k" checked>か</input>
+			<input class="cb" type="checkbox" id="row_s">さ</input>
+			<input class="cb" type="checkbox" id="row_t">た</input>
+			<input class="cb" type="checkbox" id="row_n">な</input>
+			</br>
+			<input class="cb" type="checkbox" id="row_h">は</input>
+			<input class="cb" type="checkbox" id="row_m">ま</input>
+			<input class="cb" type="checkbox" id="row_y">や</input>
+			<input class="cb" type="checkbox" id="row_r">ら</input>
+			<input class="cb" type="checkbox" id="row_w">わ</input>
+			<input class="cb" type="checkbox" id="row_b">ん</input>
 		</div>
 		<div align="center" style="margin-top:20px">
-            <input class="chb"  type="button" value="全选" onclick="select_all()"/>
-            <input class="chb"  type="button" value="反选" style="margin-left:10px" onclick="select_none()"/>
-            <input class="chb"  type="button" value="全不选" style="margin-left:10px" onclick="select_no()"/>
+            <input class="bb" type="button" value="全选" onclick="select_all()"/>
+            <input class="bb" type="button" value="反选" style="margin-left:10px" onclick="select_none()"/>
+            <input class="bb" type="button" value="全不选" style="margin-left:10px" onclick="select_no()"/>
         </div>
 		
+		<div  align="center"  style="margin-top:20px">
+			<input class="fb" id="Btn1" type="button" value="放大字体+" name="" onclick="increase_font()" />
+			<input class="fb" id="Btn2" type="button" value="缩小字体" name="" onclick="decrease_font()" />
+		</div>
         
     </body>
 </html>
