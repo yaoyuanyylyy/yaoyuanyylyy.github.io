@@ -10,16 +10,23 @@
 			}
 
 			.mb {
-				width: 80px;
-				height: 40px;
+				width: 160px;
+				height: 80px;
 				font-size: 20px;
 				margin-left:10px;
 			}
 
 			.rb {
-				width: 100px;
-				height: 50px;
+				width: 200px;
+				height: 100px;
 				font-size: 25px;
+				margin-left:10px;
+			}
+
+			.chb" {
+				width: 160px;
+				height: 80px;
+				font-size: 20px;
 				margin-left:10px;
 			}
 		</style>
@@ -217,17 +224,18 @@
 			<input id="nums" value="5"/>
 		</div>
 		<div align="center" style="margin-top:50px">
-			<input type="checkbox" id="row_a" checked=true>あ</input>
-			<input type="checkbox" id="row_k">か</input>
-			<input type="checkbox" id="row_s">さ</input>
-			<input type="checkbox" id="row_t">た</input>
-			<input type="checkbox" id="row_n">な</input>
-			<input type="checkbox" id="row_h">は</input>
-			<input type="checkbox" id="row_m">ま</input>
-			<input type="checkbox" id="row_y">や</input>
-			<input type="checkbox" id="row_r">ら</input>
-			<input type="checkbox" id="row_w">わ</input>
-			<input type="checkbox" id="row_b">ん</input>
+			<input class="chb" type="checkbox" id="row_a" checked=true>あ</input>
+			<input class="chb" type="checkbox" id="row_k">か</input>
+			<input class="chb" type="checkbox" id="row_s">さ</input>
+			<input class="chb" type="checkbox" id="row_t">た</input>
+			<input class="chb" type="checkbox" id="row_n">な</input>
+			<input class="chb" type="checkbox" id="row_h">は</input>
+</br>	
+			<input class="chb" type="checkbox" id="row_m">ま</input>
+			<input class="chb" type="checkbox" id="row_y">や</input>
+			<input class="chb" type="checkbox" id="row_r">ら</input>
+			<input class="chb" type="checkbox" id="row_w">わ</input>
+			<input class="chb" type="checkbox" id="row_b">ん</input>
 		</div>
 		<div align="center" style="margin-top:20px">
             <input type="button" value="全选" onclick="select_all()"/>
