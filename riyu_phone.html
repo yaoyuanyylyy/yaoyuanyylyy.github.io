@@ -1,0 +1,305 @@
+<html>
+    <head>
+        <title>五十音图记忆练习</title>
+        <meta charset="utf-8">
+        <style type="text/css">
+			label {
+				font-size:70px;
+				font-family:宋体;
+				color: red;
+			}
+
+			.mb {
+				width: 160px;
+				height: 80px;
+				font-size: 40px;
+				margin-left:10px;
+			}
+
+			.rb {
+				width: 200px;
+				height: 100px;
+				font-size: 45px;
+				margin-left:10px;
+			}
+
+			.bb {
+				width: 160px;
+				height: 70px;
+				font-size: 30px;
+				margin-left:10px;
+			}
+
+			.cb {
+				width: 80px;
+				height: 80px;
+				font-size: 45px;
+				margin-left:10px;
+			}
+
+			.eb {
+				font-size: 50px;
+				margin-left:10px;
+			}
+
+			.fb {
+				width: 220px;
+				height: 75px;
+				font-size: 40px;
+				margin-left:10px;
+			}
+		</style>
+		
+		<script>
+			var e =[ [
+				"あ","い","う","え","お","ア","イ","ウ","エ","オ"
+			],
+			[
+				"か","き","く","け","こ","カ","キ","ク","ケ","コ"
+			],
+			[
+				"さ","し","す","せ","そ","サ","シ","ス","セ","ソ"
+			],
+			[
+				"た","ち","つ","て","と","タ","チ","ツ","テ","ト"
+			],
+			[
+				"な","に","ぬ","ね","の","ナ","ニ","ヌ","ネ","ノ"
+			],
+			[
+				"は","ひ","ふ","へ","ほ","ハ","ヒ","フ","ヘ","ホ"
+			],
+			[
+				"ま","み","む","め","も","マ","ミ","ム","メ","モ"
+			],
+			[
+				"や","ゆ","よ","ヤ","ユ","ヨ"
+			],
+			[
+				"ら","り","る","れ","ろ","ラ","リ","ル","レ","ロ"
+			],
+			[
+				"わ","を","ワ","ヲ"
+			],
+			[
+				"ん"
+			]];
+			
+			var type = 2;
+			var shuxu = 0;
+			var daoxu = 0;
+			var suiji = 0;
+			
+			var chb = new Array();
+			var ids = new Array();			
+			var element = new Array();
+
+			var fsize = 100;
+			
+			function increase_font() {
+				var oPtxt=document.getElementById("test_request");
+				fsize += 5;
+				oPtxt.style.fontSize=fsize+'px';			
+			}
+			
+			function decrease_font() {
+				var oPtxt=document.getElementById("test_request");
+				fsize -= 5;
+				oPtxt.style.fontSize=fsize+'px';			
+			}
+			
+            function getNextElement(){
+                var test_request_node = document.getElementById("test_request");
+                var max = element.length-1;
+				var min = 0;
+                if(type==0){
+                    //顺序
+					var e;
+                    if(shuxu<=max){
+                        e = element[shuxu];
+                        shuxu++;
+                    } else
+                        e = element[shuxu-1];
+                    
+					if(shuxu>max)
+						shuxu = min;
+					return e;
+                }else if(type==1){
+                    //倒序
+					var e;
+                    if(daoxu<=max){
+                        e = element[max-daoxu];
+                        daoxu++;
+                    } else
+                        e = element[max-daoxu+1]; 
+					
+					if(daoxu>max)
+						daoxu = min;
+					return e;            
+                }else if(type==2){
+                    //随机
+					while(true) {
+						var r = getRandom(max,min);
+						if(ids.includes(r))
+							continue;
+						else {
+							ids.push(r);
+							suiji = r;
+							break;
+						}
+						
+					}
+                    return element[suiji];
+                }
+            }
+			
+			function getRandom(max,min){					
+				return Math.round(Math.random() * (max - min) + min);
+			}
+			
+			function test() {
+				var test_request_node = document.getElementById("test_request");
+				
+				chb[0] = document.getElementById('row_a');
+				chb[1] = document.getElementById('row_k');
+				chb[2] = document.getElementById('row_s');
+				chb[3] = document.getElementById('row_t');
+				chb[4] = document.getElementById('row_n');
+				chb[5] = document.getElementById('row_h');
+				chb[6] = document.getElementById('row_m');
+				chb[7] = document.getElementById('row_y');
+				chb[8] = document.getElementById('row_r');
+				chb[9] = document.getElementById('row_w');
+				chb[10] = document.getElementById('row_b');
+				
+				var countOneTime = document.getElementById('nums').value;
+				if(countOneTime<=0)
+					countOneTime = 5;
+					
+				var linecount = document.getElementById('linecount').value;
+				if(linecount<=0)
+					linecount = 5;
+				
+				element = new Array();
+				
+				for(var i=0; i<chb.length; i++) {
+					if(chb[i].checked)
+						element = element.concat(e[i]);
+				}
+				
+				if(countOneTime>element.length) {
+					alert("数字太大");
+					return;
+				}
+				
+				var show_text = "";
+				ids = new Array();
+				var count = countOneTime;
+				for(var i=0; i<count; i++)
+				{
+					show_text += getNextElement()+"  ";
+					if(((i+1)%linecount)==0)
+						show_text += "\n";
+				}
+				
+				test_request_node.innerText = show_text;
+			}
+			
+			function select_all() {
+				shuxu = 0;
+				daoxu = 0;
+				suiji = 0;
+				for(var i=0; i<chb.length; i++) {
+					chb[i].checked = true;
+				}
+			}
+			
+			function select_none() {
+				shuxu = 0;
+				daoxu = 0;
+				suiji = 0;
+				for(var i=0; i<chb.length; i++) {
+					chb[i].checked = !chb[i].checked;
+				}
+			}
+			
+			function select_no() {
+				shuxu = 0;
+				daoxu = 0;
+				suiji = 0;
+				for(var i=0; i<chb.length; i++) {
+					chb[i].checked = false;
+				}
+			}
+			
+            function paixu(t){
+                type = t;
+                var b_0 = document.getElementById("b_0");
+                var b_1 = document.getElementById("b_1");
+                var b_2 = document.getElementById("b_2");
+                if(t==0){
+                    b_0.setAttribute("style","color:#CD9B1D;");
+                    b_1.setAttribute("style","color:black;");
+                    b_2.setAttribute("style","color:black;");
+                }else if(t==1){
+                    b_0.setAttribute("style","color:black;");
+                    b_1.setAttribute("style","color:#CD9B1D;");
+                    b_2.setAttribute("style","color:black;");
+                }else if(t==2){
+                    b_0.setAttribute("style","color:black;");
+                    b_1.setAttribute("style","color:black;");
+                    b_2.setAttribute("style","color:#CD9B1D;");
+                }
+                
+                test();
+            }
+            
+            window.onload=test;
+		</script>
+    </head>
+    <body >
+        <div align="center" style="margin-top:50px">
+            <label id="test_request" ></label>
+        </div>
+        <div align="center" style="margin-top:30px">
+            <input class="mb" type="button" value="顺序" onclick="paixu(0)" id="b_0"/>
+            <input class="mb" type="button" value="倒序" onclick="paixu(1)" id="b_1"/>
+            <input class="rb" type="button" value="随机" style="color:#CD9B1D;" onclick="paixu(2)" id="b_2"/>
+        </div>
+		<div class="eb" align="center" style="margin-top:50px">
+            总的个数:
+			<input class="mb"  id="nums" value="5"/>
+		</div>
+		<div class="eb" align="center" style="margin-top:20px">
+            每行个数:
+			<input class="mb"  id="linecount" value="5"/>
+		</div>
+		<div align="center" style="margin-top:50px">
+			<input class="cb" type="checkbox" id="row_a" checked>あ</input>
+			<input class="cb" type="checkbox" id="row_k" checked>か</input>
+			<input class="cb" type="checkbox" id="row_s">さ</input>
+			<input class="cb" type="checkbox" id="row_t">た</input>
+			</br>
+			<input class="cb" type="checkbox" id="row_n">な</input>
+			<input class="cb" type="checkbox" id="row_h">は</input>
+			<input class="cb" type="checkbox" id="row_m">ま</input>
+			<input class="cb" type="checkbox" id="row_y">や</input>
+			</br>
+			<input class="cb" type="checkbox" id="row_r">ら</input>
+			<input class="cb" type="checkbox" id="row_w">わ</input>
+			<input class="cb" type="checkbox" id="row_b">ん</input>
+		</div>
+		<div align="center" style="margin-top:20px">
+            <input class="bb" type="button" value="全选" onclick="select_all()"/>
+            <input class="bb" type="button" value="反选" style="margin-left:10px" onclick="select_none()"/>
+            <input class="bb" type="button" value="全不选" style="margin-left:10px" onclick="select_no()"/>
+        </div>
+		
+		<div  align="center"  style="margin-top:20px">
+			<input class="fb" id="Btn1" type="button" value="放大字体+" name="" onclick="increase_font()" />
+			<input class="fb" id="Btn2" type="button" value="缩小字体" name="" onclick="decrease_font()" />
+		</div>
+        
+    </body>
+</html>
+
