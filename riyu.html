@@ -93,6 +93,7 @@
 			var shuxu = 0;
 			var daoxu = 0;
 			var suiji = 0;
+			var linecount = 0;
 			
 			var chb = new Array();
 			var ids = new Array();			
@@ -214,8 +215,12 @@
 				{
 					var node = document.getElementById("test_request_yin");
 					var str = "";
-					for(var i=0; i<eleshow.length; i++)
+					for(var i=0; i<eleshow.length; i++) {
 						str = str + rars[eleshow[i]]+"  ";
+						
+						if(((i+1)%linecount)==0)
+							str += "\n";
+					}
 						
 					node.innerText = str;
 				} else 
@@ -224,14 +229,18 @@
 			
 			function increase_font() {
 				var oPtxt=document.getElementById("test_request");
+				var node = document.getElementById("test_request_yin");
 				fsize += 5;
-				oPtxt.style.fontSize=fsize+'px';			
+				oPtxt.style.fontSize=fsize+'px';
+				node.style.fontSize=fsize+'px';		
 			}
 			
 			function decrease_font() {
 				var oPtxt=document.getElementById("test_request");
+				var node = document.getElementById("test_request_yin");
 				fsize -= 5;
-				oPtxt.style.fontSize=fsize+'px';			
+				oPtxt.style.fontSize=fsize+'px';
+				node.style.fontSize=fsize+'px';			
 			}
 
             function getNextElement(){
@@ -302,7 +311,7 @@
 				if(countOneTime<=0)
 					countOneTime = 5;
 					
-				var linecount = document.getElementById('linecount').value;
+				linecount = document.getElementById('linecount').value;
 				if(linecount<=0)
 					linecount = 5;
 				
