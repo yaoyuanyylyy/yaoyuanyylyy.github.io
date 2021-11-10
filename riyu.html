@@ -48,6 +48,10 @@
 				font-size: 20px;
 				margin-left:10px;
 			}
+			
+			#test_request_yin {
+				color: blue;
+			}
 		</style>
 		
 		<script>
@@ -93,8 +97,130 @@
 			var chb = new Array();
 			var ids = new Array();			
 			var element = new Array();
+			var eleshow = new Array();
 			
 			var fsize = 100;
+			
+			var rars = {			
+				"あ":"a_",
+				"い":"i_",
+				"う":"u_",
+				"え":"e_",
+				"お":"o_",
+				"ア":"a_",
+				"イ":"i_",
+				"ウ":"u_",
+				"エ":"e_",
+				"オ":"o_",
+				
+				"か":"ka",
+				"き":"ki",
+				"く":"ku",
+				"け":"ke",
+				"こ":"ko",
+				"カ":"ka",
+				"キ":"ki",
+				"ク":"ku",
+				"ケ":"ke",
+				"コ":"ko",
+								
+				"さ":"sa",
+				"し":"si",
+				"す":"su",
+				"せ":"se",
+				"そ":"so",
+				"サ":"sa",
+				"シ":"si",
+				"ス":"su",
+				"セ":"se",
+				"ソ":"so",
+						 
+				"た":"ta",
+				"ち":"ti",
+				"つ":"tu",
+				"て":"te",
+				"と":"to",
+				"タ":"ta",
+				"チ":"ti",
+				"ツ":"tu",
+				"テ":"te",
+				"ト":"to",
+						 
+				"な":"na",
+				"に":"ni",
+				"ぬ":"nu",
+				"ね":"ne",
+				"の":"no",
+				"ナ":"na",
+				"ニ":"ni",
+				"ヌ":"nu",
+				"ネ":"ne",
+				"ノ":"no",
+						 
+				"は":"ha",
+				"ひ":"hi",
+				"ふ":"hu",
+				"へ":"he",
+				"ほ":"ho",
+				"ハ":"ha",
+				"ヒ":"hi",
+				"フ":"hu",
+				"ヘ":"he",
+				"ホ":"ho",
+						 
+				"ま":"ma",
+				"み":"mi",
+				"む":"mu",
+				"め":"me",
+				"も":"mo",
+				"マ":"ma",
+				"ミ":"mi",
+				"ム":"mu",
+				"メ":"me",
+				"モ":"mo",
+						 
+				"や":"ya",
+				"ゆ":"yu",
+				"よ":"yo",
+				"ヤ":"ya",
+				"ユ":"yu",
+				"ヨ":"yo",
+						 
+				"ら":"ra",
+				"り":"ri",
+				"る":"ru",
+				"れ":"re",
+				"ろ":"ro",
+				"ラ":"ra",
+				"リ":"ri",
+				"ル":"ru",
+				"レ":"re",
+				"ロ":"ro",
+						 
+				"わ":"wa",
+				"を":"wo" ,
+				"ワ":"wa",
+				"ヲ":"wo" ,
+						 
+				"ん":"n_"
+			};
+			
+			var syClicked = false;
+			function show_yin() {
+				syClicked = !syClicked;
+				
+				var node = document.getElementById("test_request_yin");
+				if(syClicked)
+				{
+					var node = document.getElementById("test_request_yin");
+					var str = "";
+					for(var i=0; i<eleshow.length; i++)
+						str = str + rars[eleshow[i]]+"  ";
+						
+					node.innerText = str;
+				} else 
+					node.innerText = "_";				
+			}
 			
 			function increase_font() {
 				var oPtxt=document.getElementById("test_request");
@@ -197,12 +323,18 @@
 				var count = countOneTime;
 				for(var i=0; i<count; i++)
 				{
-					show_text += getNextElement()+"  ";
+					var ee = getNextElement();
+					eleshow[i] = ee;
+					show_text += ee+"  ";
 					if(((i+1)%linecount)==0)
 						show_text += "\n";
 				}
 				
 				test_request_node.innerText = show_text;
+				
+				
+				var node = document.getElementById("test_request_yin");
+				node.innerText = "_";
 			}
 			
 			function select_all() {
@@ -257,14 +389,16 @@
             window.onload=test;
 		</script>
     </head>
-    <body >
-        <div align="center" style="margin-top:50px">
+    <body>
+        <div align="center" style="margin-top:150px">
             <label id="test_request" ></label>
+            <label id="test_request_yin" ></label>
         </div>
         <div align="center" style="margin-top:30px">
             <input class="mb" type="button" value="顺序" onclick="paixu(0)" id="b_0"/>
             <input class="mb" type="button" value="倒序" onclick="paixu(1)" id="b_1"/>
             <input class="rb" type="button" value="随机" style="color:#CD9B1D;" onclick="paixu(2)" id="b_2"/>
+            <input class="mb" type="button" value="罗马音" onclick="show_yin()" id="b_3"/>
         </div>
 		<div class="eb" align="center" style="margin-top:50px">
             总的个数:
