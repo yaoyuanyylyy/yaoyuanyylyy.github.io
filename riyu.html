@@ -87,7 +87,23 @@
 			],
 			[
 				"ん","ン"
-			]];
+			],
+			[
+				"が","ぎ","ぐ","げ","ご","ガ","ギ","グ","ゲ","ゴ"
+			],
+			[
+				"ざ","じ","ず","ぜ","ぞ","ザ","ジ","ズ","ゼ","ゾ"
+			],
+			[
+				"だ","ぢ","づ","で","ど","ダ","ヂ","ヅ","ぜ","ド"
+			],
+			[
+				"ば","び","ぶ","べ","ぼ","バ","ビ","ブ","ベ","ボ"
+			],
+			[
+				"ぱ","ぴ","ぷ","ぺ","ぽ","パ","ピ","プ","ペ","ポ"
+			],
+			];
 			
 			var type = 2;
 			var shuxu = 0;
@@ -199,12 +215,68 @@
 				"ロ":"ro",
 						 
 				"わ":"wa",
-				"を":"wo" ,
+				"を":"wo",
 				"ワ":"wa",
-				"ヲ":"wo" ,
+				"ヲ":"wo",
 						 
-				"ん":"n_",
-				"ン":"n_"
+				"ん":"nn",
+				"ン":"nn",
+				
+								
+				"が":"ga",
+				"ぎ":"gi",
+				"ぐ":"gu",
+				"げ":"ge",
+				"ご":"go",
+				"ガ":"ga",
+				"ギ":"gi",
+				"グ":"gu",
+				"ゲ":"ge",
+				"ゴ":"go",
+							
+				"ざ":"za",
+				"じ":"zi",
+				"ず":"zu",
+				"ぜ":"ze",
+				"ぞ":"zo",
+				"ザ":"za",
+				"ジ":"zi",
+				"ズ":"zu",
+				"ゼ":"ze",
+				"ゾ":"zo",
+							
+				"だ":"da",
+				"ぢ":"di",
+				"づ":"du",
+				"で":"de",
+				"ど":"do",
+				"ダ":"da",
+				"ヂ":"di",
+				"ヅ":"du",
+				"で":"de",
+				"ド":"do",
+							
+				"ば":"ba",
+				"び":"bi",
+				"ぶ":"bu",
+				"べ":"be",
+				"ぼ":"bo",
+				"バ":"ba",
+				"ビ":"bi",
+				"ブ":"bu",
+				"ベ":"be",
+				"ボ":"bo",
+
+				"ぱ":"pa",
+				"ぴ":"pi",
+				"ぷ":"pu",
+				"ぺ":"pe",
+				"ぽ":"po",
+				"パ":"pa",
+				"ピ":"pi",
+				"プ":"pu",
+				"ペ":"pe",
+				"ポ":"po",
 			};
 			
 			var syClicked = false;
@@ -306,7 +378,12 @@
 				chb[7] = document.getElementById('row_y');
 				chb[8] = document.getElementById('row_r');
 				chb[9] = document.getElementById('row_w');
-				chb[10] = document.getElementById('row_b');
+				chb[10] = document.getElementById('row_nn');
+				chb[11] = document.getElementById('row_g');
+				chb[12] = document.getElementById('row_z');
+				chb[13] = document.getElementById('row_d');
+				chb[14] = document.getElementById('row_b');
+				chb[15] = document.getElementById('row_p');
 				
 				var countOneTime = document.getElementById('nums').value;
 				if(countOneTime<=0)
@@ -420,19 +497,31 @@
             每行个数:
 			<input class="mb"  id="linecount" value="5"/>
 		</div>
-		<div align="center" style="margin-top:50px">
+		<div align="center" style="margin-top:50px;">
+			<div>
 			<input class="cb" type="checkbox" id="row_a" checked>あ</input>
 			<input class="cb" type="checkbox" id="row_k" checked>か</input>
 			<input class="cb" type="checkbox" id="row_s">さ</input>
 			<input class="cb" type="checkbox" id="row_t">た</input>
 			<input class="cb" type="checkbox" id="row_n">な</input>
+			</div>
 			</br>
+			<div style="margin-left:83px">
 			<input class="cb" type="checkbox" id="row_h">は</input>
 			<input class="cb" type="checkbox" id="row_m">ま</input>
 			<input class="cb" type="checkbox" id="row_y">や</input>
 			<input class="cb" type="checkbox" id="row_r">ら</input>
 			<input class="cb" type="checkbox" id="row_w">わ</input>
-			<input class="cb" type="checkbox" id="row_b">ん</input>
+			<input class="cb" type="checkbox" id="row_nn">ん</input>
+			</div>
+			</br>
+			<div>
+			<input class="cb" type="checkbox" id="row_g">が</input>
+			<input class="cb" type="checkbox" id="row_z">ざ</input>
+			<input class="cb" type="checkbox" id="row_d">だ</input>
+			<input class="cb" type="checkbox" id="row_b">ば</input>
+			<input class="cb" type="checkbox" id="row_p">ぱ</input>
+			</div>
 		</div>
 		<div align="center" style="margin-top:20px">
             <input class="bb" type="button" value="全选" onclick="select_all()"/>
@@ -447,4 +536,3 @@
         
     </body>
 </html>
-
