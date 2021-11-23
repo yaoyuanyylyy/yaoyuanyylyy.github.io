@@ -3,9 +3,9 @@
         <title>五十音图记忆练习</title>
         <meta charset="utf-8">
         <style type="text/css">
-			label {
-				font-size:100px;
-				font-family:宋体;
+			#container {
+				font-size:60px;
+				font-family: "ヒラギノ角ゴPro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "MS Pゴシック","MS PGothic",sans-serif;
 				color: red;
 			}
 
@@ -25,7 +25,14 @@
 
 			.bb {
 				width: 80px;
-				height: 30px;
+				height: 26px;
+				font-size: 17px;
+				margin-left:10px;
+			}
+
+			.gb {
+				width: 80px;
+				height: 40px;
 				font-size: 20px;
 				margin-left:10px;
 			}
@@ -49,12 +56,17 @@
 				margin-left:10px;
 			}
 			
-			#test_request_yin {
+			#show_yin {
 				color: blue;
 			}
+			
+			.div-left{ float:left;width:60%;margin-top:40px;}
+			
+			.div-right{ float:right;width:38%;margin-top:40px;}
 		</style>
 		
 		<script>
+		
 			var e =[ [
 				"あ","い","う","え","お","ア","イ","ウ","エ","オ"
 			],
@@ -95,7 +107,7 @@
 				"ざ","じ","ず","ぜ","ぞ","ザ","ジ","ズ","ゼ","ゾ"
 			],
 			[
-				"だ","ぢ","づ","で","ど","ダ","ヂ","ヅ","ぜ","ド"
+				"だ","ぢ","づ","で","ど","ダ","ヂ","ヅ","デ","ド"
 			],
 			[
 				"ば","び","ぶ","べ","ぼ","バ","ビ","ブ","ベ","ボ"
@@ -103,6 +115,43 @@
 			[
 				"ぱ","ぴ","ぷ","ぺ","ぽ","パ","ピ","プ","ペ","ポ"
 			],
+			
+			[
+				"きゃ","きゅ","きょ","キャ","キュ","キョ"
+			],
+			[
+				"しゃ","しゅ","しょ","シャ","シュ","ショ"
+			],
+			[
+				"ちゃ","ちゅ","ちょ","チャ","チュ","チョ"
+			],
+			[
+				"にゃ","にゅ","にょ","ニャ","ニュ","ニョ"
+			],
+			[
+				"ひゃ","ひゅ","ひょ","ヒャ","ヒュ","ヒョ"
+			],
+			[
+				"みゃ","みゅ","みょ","ミャ","ミュ","ミョ"
+			],
+			[
+				"りゃ","りゅ","りょ","リャ","リュ","リョ"
+			],
+			[
+				"ぎゃ","ぎゅ","ぎょ","ギャ","ギュ","ギョ"
+			],
+			[
+				"じゃ","じゅ","じょ","ジャ","ジュ","ジョ"
+			],
+			[
+				"ぢゃ","ぢゅ","ぢょ","ヂャ","ヂュ","ヂョ"
+			],
+			[
+				"びゃ","びゅ","びょ","ビャ","ビュ","ビョ"
+			],
+			[
+				"ぴゃ","ぴゅ","ぴょ","ピャ","ピュ","ピョ"
+			]
 			];
 			
 			var type = 2;
@@ -116,19 +165,19 @@
 			var element = new Array();
 			var eleshow = new Array();
 			
-			var fsize = 100;
+			var fsize = 70;
 			
 			var rars = {			
-				"あ":"a_",
-				"い":"i_",
-				"う":"u_",
-				"え":"e_",
-				"お":"o_",
-				"ア":"a_",
-				"イ":"i_",
-				"ウ":"u_",
-				"エ":"e_",
-				"オ":"o_",
+				"あ":"a",
+				"い":"i",
+				"う":"u",
+				"え":"e",
+				"お":"o",
+				"ア":"a",
+				"イ":"i",
+				"ウ":"u",
+				"エ":"e",
+				"オ":"o",
 				
 				"か":"ka",
 				"き":"ki",
@@ -142,24 +191,24 @@
 				"コ":"ko",
 								
 				"さ":"sa",
-				"し":"si",
+				"し":"shi",
 				"す":"su",
 				"せ":"se",
 				"そ":"so",
 				"サ":"sa",
-				"シ":"si",
+				"シ":"shi",
 				"ス":"su",
 				"セ":"se",
 				"ソ":"so",
 						 
 				"た":"ta",
-				"ち":"ti",
-				"つ":"tu",
+				"ち":"chi",
+				"つ":"tsu",
 				"て":"te",
 				"と":"to",
 				"タ":"ta",
-				"チ":"ti",
-				"ツ":"tu",
+				"チ":"chi",
+				"ツ":"tsu",
 				"テ":"te",
 				"ト":"to",
 						 
@@ -181,7 +230,7 @@
 				"ほ":"ho",
 				"ハ":"ha",
 				"ヒ":"hi",
-				"フ":"hu",
+				"フ":"fu",
 				"ヘ":"he",
 				"ホ":"ho",
 						 
@@ -235,12 +284,12 @@
 				"ゴ":"go",
 							
 				"ざ":"za",
-				"じ":"zi",
+				"じ":"ji",
 				"ず":"zu",
 				"ぜ":"ze",
 				"ぞ":"zo",
 				"ザ":"za",
-				"ジ":"zi",
+				"ジ":"ji",
 				"ズ":"zu",
 				"ゼ":"ze",
 				"ゾ":"zo",
@@ -253,7 +302,7 @@
 				"ダ":"da",
 				"ヂ":"di",
 				"ヅ":"du",
-				"で":"de",
+				"デ":"de",
 				"ド":"do",
 							
 				"ば":"ba",
@@ -277,47 +326,106 @@
 				"プ":"pu",
 				"ペ":"pe",
 				"ポ":"po",
+				
+				"きゃ":"kya",
+				"きゅ":"kyu",
+				"きょ":"kyo",
+				"キャ":"kya",
+				"キュ":"kyu",
+				"キョ":"kyo",
+							
+				"しゃ":"sha",
+				"しゅ":"shu",
+				"しょ":"sho",
+				"シャ":"sha",
+				"シュ":"shu",
+				"ショ":"sho",
+							
+				"ちゃ":"cha",
+				"ちゅ":"chu",
+				"ちょ":"cho",
+				"チャ":"cha",
+				"チュ":"chu",
+				"チョ":"cho",
+							
+				"にゃ":"nya",
+				"にゅ":"nyu",
+				"にょ":"nyo",
+				"ニャ":"nya",
+				"ニュ":"nyu",
+				"ニョ":"nyo",
+							
+				"ひゃ":"hya",
+				"ひゅ":"hyu",
+				"ひょ":"hyo",
+				"ヒャ":"hya",
+				"ヒュ":"hyu",
+				"ヒョ":"hyo",
+							
+				"みゃ":"mya",
+				"みゅ":"myu",
+				"みょ":"myo",
+				"ミャ":"mya",
+				"ミュ":"myu",
+				"ミョ":"myo",
+							
+				"りゃ":"rya",
+				"りゅ":"ryu",
+				"りょ":"ryo",
+				"リャ":"rya",
+				"リュ":"ryu",
+				"リョ":"ryo",
+							
+				"ぎゃ":"gya",
+				"ぎゅ":"gyu",
+				"ぎょ":"gyo",
+				"ギャ":"gya",
+				"ギュ":"gyu",
+				"ギョ":"gyo",
+							
+				"じゃ":"ja",
+				"じゅ":"ju",
+				"じょ":"jo",
+				"ジャ":"ja",
+				"ジュ":"ju",
+				"ジョ":"jo",
+							
+				"ぢゃ":"ja",
+				"ぢゅ":"ju",
+				"ぢょ":"jo",
+				"ヂャ":"ja",
+				"ヂュ":"ju",
+				"ヂョ":"jo",
+							
+				"びゃ":"bya",
+				"びゅ":"byu",
+				"びょ":"byo",
+				"ビャ":"bya",
+				"ビュ":"byu",
+				"ビョ":"byo",
+							
+				"ぴゃ":"pya",
+				"ぴゅ":"pyu",
+				"ぴょ":"pyo",
+				"ピャ":"pya",
+				"ピュ":"pyu",
+				"ピョ":"pyo",
 			};
 			
-			var syClicked = false;
-			function show_yin() {
-				syClicked = !syClicked;
 				
-				var node = document.getElementById("test_request_yin");
-				if(syClicked)
-				{
-					var node = document.getElementById("test_request_yin");
-					var str = "";
-					for(var i=0; i<eleshow.length; i++) {
-						str = str + rars[eleshow[i]]+"  ";
-						
-						if(((i+1)%linecount)==0)
-							str += "\n";
-					}
-						
-					node.innerText = str;
-				} else 
-					node.innerText = "_";				
-			}
-			
 			function increase_font() {
-				var oPtxt=document.getElementById("test_request");
-				var node = document.getElementById("test_request_yin");
+				var oPtxt=document.getElementById("container");
 				fsize += 5;
 				oPtxt.style.fontSize=fsize+'px';
-				node.style.fontSize=fsize+'px';		
 			}
 			
 			function decrease_font() {
-				var oPtxt=document.getElementById("test_request");
-				var node = document.getElementById("test_request_yin");
+				var oPtxt=document.getElementById("container");
 				fsize -= 5;
-				oPtxt.style.fontSize=fsize+'px';
-				node.style.fontSize=fsize+'px';			
+				oPtxt.style.fontSize=fsize+'px';		
 			}
 
             function getNextElement(){
-                var test_request_node = document.getElementById("test_request");
                 var max = element.length-1;
 				var min = 0;
                 if(type==0){
@@ -365,9 +473,7 @@
 				return Math.round(Math.random() * (max - min) + min);
 			}
 			
-			function test() {
-				var test_request_node = document.getElementById("test_request");
-				
+			function test() {				
 				chb[0] = document.getElementById('row_a');
 				chb[1] = document.getElementById('row_k');
 				chb[2] = document.getElementById('row_s');
@@ -379,11 +485,25 @@
 				chb[8] = document.getElementById('row_r');
 				chb[9] = document.getElementById('row_w');
 				chb[10] = document.getElementById('row_nn');
+				
 				chb[11] = document.getElementById('row_g');
 				chb[12] = document.getElementById('row_z');
 				chb[13] = document.getElementById('row_d');
 				chb[14] = document.getElementById('row_b');
 				chb[15] = document.getElementById('row_p');
+				
+				chb[16] = document.getElementById('row_ak');
+				chb[17] = document.getElementById('row_as');
+				chb[18] = document.getElementById('row_at');
+				chb[19] = document.getElementById('row_an');
+				chb[20] = document.getElementById('row_ah');
+				chb[21] = document.getElementById('row_am');
+				chb[22] = document.getElementById('row_ar');
+				chb[23] = document.getElementById('row_ag');
+				chb[24] = document.getElementById('row_az');
+				chb[25] = document.getElementById('row_ad');
+				chb[26] = document.getElementById('row_ab');
+				chb[27] = document.getElementById('row_ap');
 				
 				var countOneTime = document.getElementById('nums').value;
 				if(countOneTime<=0)
@@ -405,7 +525,11 @@
 					return;
 				}
 				
-				var show_text = "";
+				var container = document.getElementById('container');
+				while (container.hasChildNodes()) {
+					container.removeChild(container.lastChild);
+				}
+				
 				ids = new Array();
 				eleshow = new Array();
 				var count = countOneTime;
@@ -413,44 +537,98 @@
 				{
 					var ee = getNextElement();
 					eleshow[i] = ee;
-					show_text += ee+"  ";
+					
+					var span = document.createElement('span');					
+					span.innerHTML = ee + "&nbsp";
+					span.class = 'show_zi';
+					
+					if(ee.length>1)
+						span.style.color = '#0000ee';
+					else {
+						span.style.color = '#ee0000';					
+						span.innerHTML += "&nbsp;&nbsp;&nbsp;";
+					}
+						
 					if(((i+1)%linecount)==0)
-						show_text += "\n";
-				}
-				
-				test_request_node.innerText = show_text;
-				
-				
-				var node = document.getElementById("test_request_yin");
-				node.innerText = "_";
+						span.innerText += "\n";
+						
+					span.title = rars[ee];
+					
+					container.appendChild(span);
+
+				}				
+								
 				syClicked = false;
 			}
 			
 			function select_all() {
-				shuxu = 0;
-				daoxu = 0;
-				suiji = 0;
-				for(var i=0; i<chb.length; i++) {
-					chb[i].checked = true;
-				}
+				selectCheckbox(2, 0, chb.length);
 			}
 			
-			function select_none() {
-				shuxu = 0;
-				daoxu = 0;
-				suiji = 0;
-				for(var i=0; i<chb.length; i++) {
-					chb[i].checked = !chb[i].checked;
-				}
+			function select_inv() {
+				selectCheckbox(3, 0, chb.length);
 			}
 			
 			function select_no() {
+				selectCheckbox(1, 0, chb.length);
+			}
+			
+			function select_qing_all() {
+				selectCheckbox(2, 0, 10);
+			}
+			
+			function select_qing_inv() {
+				selectCheckbox(3, 0, 10);
+			}
+			
+			function select_qing_no() {
+				selectCheckbox(1, 0, 10);
+			}
+			
+			function select_zhuo_all() {
+				selectCheckbox(2, 11, 15);
+			}
+			
+			function select_zhuo_inv() {
+				selectCheckbox(3, 11, 15);
+			}
+			
+			function select_zhuo_no() {
+				selectCheckbox(1, 11, 15);
+			}
+			
+			function select_ao_all() {
+				selectCheckbox(2, 16, 27);
+			}
+			
+			function select_ao_inv() {
+				selectCheckbox(3, 16, 27);
+			}
+			
+			function select_ao_no() {
+				selectCheckbox(1, 16, 27);
+			}
+			
+			
+			//type:1-no;2-all;3-inverse
+			function selectCheckbox(type, min, max)
+			{
 				shuxu = 0;
 				daoxu = 0;
 				suiji = 0;
-				for(var i=0; i<chb.length; i++) {
-					chb[i].checked = false;
-				}
+				
+				if(min<0 || max>chb.length)
+					console("selectCheckbox range error.",min, max);
+				
+				for(var i=min; i<=max; i++)
+				{
+					if(type==1)
+						chb[i].checked = false;
+					else if(type==2)
+						chb[i].checked = true;
+					else if(type==3)
+						chb[i].checked = !chb[i].checked;					
+				}				
 			}
 			
             function paixu(t){
@@ -479,60 +657,117 @@
 		</script>
     </head>
     <body>
-        <div align="center" style="margin-top:150px">
-            <label id="test_request" ></label>
-            <label id="test_request_yin" ></label>
+        <div id="container" align="center" style="margin-top:50px">
         </div>
+
         <div align="center" style="margin-top:30px">
             <input class="mb" type="button" value="顺序" onclick="paixu(0)" id="b_0"/>
             <input class="mb" type="button" value="倒序" onclick="paixu(1)" id="b_1"/>
             <input class="rb" type="button" value="随机" style="color:#CD9B1D;" onclick="paixu(2)" id="b_2"/>
-            <input class="mb" type="button" value="罗马音" onclick="show_yin()" id="b_3"/>
         </div>
-		<div class="eb" align="center" style="margin-top:50px">
-            总的个数:
-			<input class="mb"  id="nums" value="5"/>
-		</div>
-		<div class="eb" align="center" style="margin-top:20px">
-            每行个数:
-			<input class="mb"  id="linecount" value="5"/>
-		</div>
-		<div align="center" style="margin-top:50px;">
-			<div>
-			<input class="cb" type="checkbox" id="row_a" checked>あ</input>
-			<input class="cb" type="checkbox" id="row_k" checked>か</input>
-			<input class="cb" type="checkbox" id="row_s">さ</input>
-			<input class="cb" type="checkbox" id="row_t">た</input>
-			<input class="cb" type="checkbox" id="row_n">な</input>
-			</div>
-			</br>
-			<div style="margin-left:83px">
-			<input class="cb" type="checkbox" id="row_h">は</input>
-			<input class="cb" type="checkbox" id="row_m">ま</input>
-			<input class="cb" type="checkbox" id="row_y">や</input>
-			<input class="cb" type="checkbox" id="row_r">ら</input>
-			<input class="cb" type="checkbox" id="row_w">わ</input>
-			<input class="cb" type="checkbox" id="row_nn">ん</input>
-			</div>
-			</br>
-			<div>
-			<input class="cb" type="checkbox" id="row_g">が</input>
-			<input class="cb" type="checkbox" id="row_z">ざ</input>
-			<input class="cb" type="checkbox" id="row_d">だ</input>
-			<input class="cb" type="checkbox" id="row_b">ば</input>
-			<input class="cb" type="checkbox" id="row_p">ぱ</input>
-			</div>
-		</div>
-		<div align="center" style="margin-top:20px">
-            <input class="bb" type="button" value="全选" onclick="select_all()"/>
-            <input class="bb" type="button" value="反选" style="margin-left:10px" onclick="select_none()"/>
-            <input class="bb" type="button" value="全不选" style="margin-left:10px" onclick="select_no()"/>
-        </div>
+		
 		
 		<div  align="center"  style="margin-top:20px">
 			<input class="fb" id="Btn1" type="button" value="放大字体+" name="" onclick="increase_font()" />
-			<input class="fb" id="Btn2" type="button" value="缩小字体" name="" onclick="decrease_font()" />
+			<input class="fb" id="Btn2" type="button" value="缩小字体-" name="" onclick="decrease_font()" />
 		</div>
+		
+		<div class="eb" align="center" style="margin-top:50px">
+            总的个数:
+			<input class="mb"  id="nums" value="5"/>
+            <span  style="margin-left:50px;">每行个数:</span>
+			<input class="mb"  id="linecount" value="5"/>
+		</div>
+		
+		
+        <div align="center" style="margin-top:30px">
+			<input class="gb" type="button" value="全选" style="margin-left:10px;" onclick="select_all()"/>
+			<input class="gb" type="button" value="反选" style="margin-left:10px;" onclick="select_inv()"/>
+			<input class="gb" type="button" value="全不选" style="margin-left:10px;" onclick="select_no()"/>
+		</div>
+		
+		<div align="center">
+			<div>
+				<div class="div-left" align="right" >
+					<div>
+						<input class="cb" type="checkbox" id="row_a" checked>あ</input>
+						<input class="cb" type="checkbox" id="row_k" checked>か</input>
+						<input class="cb" type="checkbox" id="row_s">さ</input>
+						<input class="cb" type="checkbox" id="row_t">た</input>
+						<input class="cb" type="checkbox" id="row_n">な</input>
+					</div>
+					
+					</br>
+					
+					<div style="margin-left:83px">
+						<input class="cb" type="checkbox" id="row_h">は</input>
+						<input class="cb" type="checkbox" id="row_m">ま</input>
+						<input class="cb" type="checkbox" id="row_y">や</input>
+						<input class="cb" type="checkbox" id="row_r">ら</input>
+						<input class="cb" type="checkbox" id="row_w">わ</input>
+						<input class="cb" type="checkbox" id="row_nn">ん</input>
+					</div>
+				</div>
+				
+				<div class="div-right" align="left">
+					<input class="bb" type="button" value="全选" onclick="select_qing_all()"/><br/>
+					<input class="bb" type="button" value="反选" style="margin-top:5px;" onclick="select_qing_inv()"/><br/>
+					<input class="bb" type="button" value="全不选" style="margin-top:5px;" onclick="select_qing_no()"/>
+				</div>
+			</div>
+			
+			
+			<div>
+				<div class="div-left"  align="right">
+					<div>
+					<input class="cb" type="checkbox" id="row_g">が</input>
+					<input class="cb" type="checkbox" id="row_z">ざ</input>
+					<input class="cb" type="checkbox" id="row_d">だ</input>
+					<input class="cb" type="checkbox" id="row_b">ば</input>
+					<input class="cb" type="checkbox" id="row_p">ぱ</input>
+					</div>
+				</div>
+					
+				<div class="div-right" align="left">
+					<input class="bb" type="button" value="全选" onclick="select_zhuo_all()"/>
+					<input class="bb" type="button" value="反选" style="margin-top:5px;" onclick="select_zhuo_inv()"/>
+					<input class="bb" type="button" value="全不选" style="margin-top:5px;" onclick="select_zhuo_no()"/>
+				</div>
+			</div>
+			
+			
+			<div>
+				<div class="div-left"  align="right">
+					<div>
+						<input class="cb" type="checkbox" id="row_ak">か</input>
+						<input class="cb" type="checkbox" id="row_as">さ</input>
+						<input class="cb" type="checkbox" id="row_at">た</input>
+						<input class="cb" type="checkbox" id="row_an">な</input>
+						<input class="cb" type="checkbox" id="row_ah">は</input>
+						<input class="cb" type="checkbox" id="row_am">ま</input>
+					<div>
+					
+					</br>
+					
+					</div>
+						<input class="cb" type="checkbox" id="row_ar">ら</input>
+						<input class="cb" type="checkbox" id="row_ag">が</input>
+						<input class="cb" type="checkbox" id="row_az">ざ</input>
+						<input class="cb" type="checkbox" id="row_ad">だ</input>
+						<input class="cb" type="checkbox" id="row_ab">ば</input>
+						<input class="cb" type="checkbox" id="row_ap">ぱ</input>
+					</div>
+				</div>
+				
+				<div class="div-right" align="left">
+					<input class="bb" type="button" value="全选" onclick="select_ao_all()"/><br/>
+					<input class="bb" type="button" value="反选" style="margin-top:5px;" onclick="select_ao_inv()"/><br/>
+					<input class="bb" type="button" value="全不选" style="margin-top:5px;" onclick="select_ao_no()"/>
+				</div>
+			</div>
+			
+		</div>
+	
         
     </body>
 </html>
